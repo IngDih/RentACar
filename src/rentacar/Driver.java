@@ -17,10 +17,12 @@ import java.io.FileReader;
 import java.io.IOException;
 
 // INCLUDE HERE THE LINK TO THE GIT REPOSITORY AS A COMMENT!!!!
+//Robert Szlufik: 
 
 
 // INCLUDE HERE THE FULL NAME AND STUDENT NUMBER OF BOTH TEAM MEMBERS 
 // AS A COMMENT!!!!
+//Robert Szlufik, student no. 2020358
 
 
 
