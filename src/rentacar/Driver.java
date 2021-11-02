@@ -17,7 +17,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 // INCLUDE HERE THE LINK TO THE GIT REPOSITORY AS A COMMENT!!!!
-//Robert Szlufik: 
+//Robert Szlufik: https://github.com/rpsbobby/RentACar
 
 
 // INCLUDE HERE THE FULL NAME AND STUDENT NUMBER OF BOTH TEAM MEMBERS 
