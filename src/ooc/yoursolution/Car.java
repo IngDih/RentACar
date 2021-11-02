@@ -5,6 +5,7 @@
  */
 package ooc.yoursolution;
 
+import java.util.HashMap;
 import java.util.Map;
 import ooc.enums.Make;
 import ooc.enums.Month;
@@ -14,10 +15,19 @@ import ooc.enums.Month;
  * @author Ingrid
  */
 public class Car implements CarInterface {
+    
+    //Variables declaration\\
+    
+    //Constructor\\
+    public Car(){
+        
+    }
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<Month, boolean[]> map = new HashMap<>();
+        
+        return map;
     }
 
     @Override
