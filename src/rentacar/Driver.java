@@ -62,8 +62,8 @@ public class Driver {
         // Try some bookings
         System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5));
         System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5));
-        System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5));
-        System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5));
+        System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5) + " : This shouldn't work");
+        System.out.println(rentACar.bookCar(Month.JANUARY, 1, Make.BMW, 5)+ " : This shouldn't work");
         System.out.println(rentACar.bookCar(Month.FEBRUARY, 3, Make.FIAT, 10));
         System.out.println(rentACar.bookCar(Month.MARCH, 10, Make.FORD, 12));
         
