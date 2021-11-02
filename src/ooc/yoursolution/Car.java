@@ -33,10 +33,11 @@ public class Car implements CarInterface {
     @Override
     public Map<Month, boolean[]> createAvailability() {
         Map<Month, boolean[]> map = new HashMap<>();
-        //This loops over the values attached to the enum Month and uses the getNumberOfDays method to determine 
-        // the size of the array for each month. Days are true by default.
+        Month tempMonth;
+        boolean[] days;
         for (Month month : Month.values()) {
-            boolean[] days = new boolean[month.getNumberOfDays()];
+            tempMonth = month;
+            days = new boolean[month.getNumberOfDays()];
             for (Boolean day : days) {
                 day = true;
             }
@@ -84,7 +85,7 @@ public class Car implements CarInterface {
     public boolean isAvailable(Month month, int day) {
         //This method checks the map created to see if a day is booked or not
         //It gets the array for the month and takes out one slot in it
-        return this.availability.get(month)[day - 1]; 
+        return this.availability.get(month)[day - 1];
     }
 
     @Override
@@ -94,8 +95,7 @@ public class Car implements CarInterface {
         if (this.isAvailable(month, day)) {
             this.availability.get(month)[day - 1] = false;
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
