@@ -15,18 +15,26 @@ import ooc.enums.Month;
  * @author Ingrid
  */
 public class Car implements CarInterface {
-    
+
     //Variables declaration\\
-    
+
     //Constructor\\
-    public Car(){
-        
+    public Car() {
+
     }
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
         Map<Month, boolean[]> map = new HashMap<>();
-        
+        //This loops over the values attached to the enum Month and uses the getNumberOfDays method to determine 
+        // the size of the array for each month. Days are true by default.
+        for (Month month : Month.values()) {
+            boolean[] days = new boolean[month.getNumberOfDays()];
+            for (Boolean day : days) {
+                day = true;
+            }
+            map.put(month, days);
+        }     
         return map;
     }
 
@@ -74,5 +82,5 @@ public class Car implements CarInterface {
     public boolean book(Month month, int day) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
