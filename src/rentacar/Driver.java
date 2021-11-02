@@ -23,6 +23,7 @@ import java.io.IOException;
 // INCLUDE HERE THE FULL NAME AND STUDENT NUMBER OF BOTH TEAM MEMBERS 
 // AS A COMMENT!!!!
 //Robert Szlufik, student no. 2020358
+//Ingrid Castro, student no.2020341
 
 
 
