@@ -21,12 +21,12 @@ public class Car implements CarInterface {
     private double rate;
     private Map<Month, boolean[]> availability;
     private int id;
-    
+
     //Constructor\\
     public Car(Make make, double rate, int id) {
         this.make = make;
         this.rate = rate;
-        this.availability = createAvailability();
+        this.availability = this.createAvailability();
         this.id = id;
     }
 
@@ -41,7 +41,7 @@ public class Car implements CarInterface {
                 day = true;
             }
             map.put(month, days);
-        }     
+        }
         return map;
     }
 
@@ -82,12 +82,22 @@ public class Car implements CarInterface {
 
     @Override
     public boolean isAvailable(Month month, int day) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //This method checks the map created to see if a day is booked or not
+        //It gets the array for the month and takes out one slot in it
+        return this.availability.get(month)[day - 1]; 
     }
 
     @Override
     public boolean book(Month month, int day) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //If the month and day are available it will return true and turn that day of the month to false.
+        //If it's not available it just returns false straight away.
+        if (this.isAvailable(month, day)) {
+            this.availability.get(month)[day - 1] = false;
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
