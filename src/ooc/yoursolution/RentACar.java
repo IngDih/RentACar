@@ -47,14 +47,13 @@ public class RentACar implements RentACarInterface {
         int from = day;
         int to = from + lengthOfRent;
         List<CarInterface> listOfMake = this.getAllCarsOfAMake(make, this.listOfCars);
-        List<Boolean> dateForID = new ArrayList<>();
+      
 
         for(CarInterface car: listOfMake){
             flag = true;
             
-            
             for(int i = from; i < to ; i ++) {
-                if(!car.isAvailable(month, day)){
+                if(!car.isAvailable(month, i)){
                     flag = false;
                 }
             }
@@ -62,32 +61,8 @@ public class RentACar implements RentACarInterface {
             if(flag) {
                 return flag;
             } 
-//            Map<Month, boolean[]> tempMap = car.getAvailability();
-//
-//                for(Map.Entry<Month, boolean[]> entry : tempMap.entrySet()) {
-//                    if(entry.getKey().compareTo(month) == 0) {
-//                        for(int i = from; i < to ; i++) {
-//                            if(entry.getValue()[i] = false) {
-//                                testBoolean = false;
-//                            }
-//                        }
-//                    }
-//                    if(testBoolean == true) {
-//                    dateForID.add(Boolean.TRUE);
-//                    }
-//                }
-//            car.setAvailability(tempMap);
-                
             
         }
-        
-        
-//        for(Boolean b: dateForID) {
-//            if(b == Boolean.TRUE){
-//                available = true;
-//            } 
-//        }
-            
             
     return flag;
         
