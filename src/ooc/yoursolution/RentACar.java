@@ -4,7 +4,9 @@
  */
 package ooc.yoursolution;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import ooc.enums.Make;
 import ooc.enums.Month;
 
@@ -40,7 +42,41 @@ public class RentACar implements RentACarInterface {
 
     @Override
     public boolean checkAvailability(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean flag = true;
+        boolean isAvailable = false;
+        int from = day-1;
+        int to = from + lengthOfRent;
+        List<CarInterface> listOfMake = this.getAllCarsOfAMake(make, this.listOfCars);
+        List<Boolean> dateForID = new ArrayList<>();
+
+        for(CarInterface car: listOfMake){
+            Map<Month, boolean[]> tempMap = car.getAvailability();
+            
+            for(Map.Entry<Month, boolean[]> entry : tempMap.entrySet()) {
+                if(entry.getKey().compareTo(month) == 0) {
+                    for(int i = from; i < to ; i++) {
+                        if(entry.getValue()[i] = false) {
+                            flag = false;
+                        }
+                    }
+                }
+                if(flag == true) {
+                dateForID.add(Boolean.TRUE);
+                }
+            }
+            car.setAvailability(tempMap);
+        }
+        
+        
+        for(Boolean b: dateForID) {
+            if(b == Boolean.TRUE){
+                isAvailable = true;
+            } 
+        }
+            
+            
+        return isAvailable;
+            
     }
 
     @Override
@@ -56,6 +92,26 @@ public class RentACar implements RentACarInterface {
     @Override
     public int getNumberOfCars() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
+    /**
+     * Helper method, retrevies all cars with the same make from the entire car list
+     * 
+     * @param make
+     * @param list
+     * @return ArrayList of CarInterface object with the same Make
+     */
+    private List<CarInterface> getAllCarsOfAMake(Make make, List<CarInterface> list) {
+        List<CarInterface> sameMakeList = new ArrayList<>();
+        for(CarInterface car: this.listOfCars) {
+            String makeString = car.getMake().toString();
+            if(makeString.equals(make.toString())){
+                sameMakeList.add(car);
+            }
+        }
+        
+        return sameMakeList;
     }
     
 }
