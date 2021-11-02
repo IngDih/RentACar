@@ -42,36 +42,37 @@ public class RentACar implements RentACarInterface {
 
     @Override
     public boolean checkAvailability(Month month, int day, Make make, int lengthOfRent) {
-        boolean flag = true;
-        boolean isAvailable = false;
+        boolean flag = true; 
+        boolean isAvailable = false; // init
         int from = day-1;
         int to = from + lengthOfRent;
-        List<CarInterface> listOfMake = this.getAllCarsOfAMake(make, this.listOfCars);
-        List<Boolean> dateForID = new ArrayList<>();
+        List<CarInterface> listOfMake = this.getAllCarsOfAMake(make, this.listOfCars); // list of all cars of given make 
+        List<Boolean> booleanList = new ArrayList<>();
 
         for(CarInterface car: listOfMake){
             Map<Month, boolean[]> tempMap = car.getAvailability();
             
-            for(Map.Entry<Month, boolean[]> entry : tempMap.entrySet()) {
+            // Itetating through Map
+            for(Map.Entry<Month, boolean[]> entry : tempMap.entrySet()) { 
                 if(entry.getKey().compareTo(month) == 0) {
                     for(int i = from; i < to ; i++) {
                         if(entry.getValue()[i] = false) {
+                            //updating flag value
                             flag = false;
                         }
                     }
                 }
+                //if 
                 if(flag == true) {
-                dateForID.add(Boolean.TRUE);
+                booleanList.add(Boolean.TRUE);
                 }
             }
             car.setAvailability(tempMap);
         }
         
-        
-        for(Boolean b: dateForID) {
-            if(b == Boolean.TRUE){
-                isAvailable = true;
-            } 
+        // if array contains true, the car is available 
+        if(booleanList.contains(Boolean.TRUE)){
+            isAvailable = true;
         }
             
             
