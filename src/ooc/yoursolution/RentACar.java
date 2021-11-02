@@ -19,6 +19,11 @@ public class RentACar implements RentACarInterface {
     private List<CarInterface> listOfCars; 
     private String name; 
     
+    public RentACar(List<CarInterface> list, String businessName) {
+        this.listOfCars = list;
+        this.name = businessName;
+    }
+    
 
    @Override
     public List<CarInterface> getCars() {
