@@ -82,12 +82,96 @@ public class RentACar implements RentACarInterface {
 
     @Override
     public int getCarAvailable(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // retreving list of cars of the same make
+        List<CarInterface> listOfMake = this.getAllCarsOfAMake(make, this.listOfCars);
+        boolean isAvailable = this.checkAvailability(month, day, make, lengthOfRent);
+        //list of available ids
+        List<Integer> idList = new ArrayList<>();
+        boolean testBoolean = true;
+        
+        int id = 0; // if -1 is returned, the car is not available 
+        
+        int from = day-1;
+        int to = from + lengthOfRent;
+        List<Boolean> dateForID = new ArrayList<>();
+    
+        if(isAvailable) {
+            
+            
+            
+            for(CarInterface car: listOfMake){
+                
+                // test
+//                Map<Month, boolean[]> tempMap = car.getAvailability();
+//                
+//                for(Map.Entry<Month, boolean[]> entry : tempMap.entrySet()){
+//                    if(entry.getKey().compareTo(month)== 0) {
+//                        for(int i = from; i < to ; i++) {
+//                            if(entry.getValue()[i] == false) {
+//                            //if any of the days is not available, test boolean is false 
+//                            testBoolean = false;
+//                            }
+//                        }
+//                        if(testBoolean == true) {
+//                            System.out.println(car.getId());
+//                            idList.add(car.getId());
+//                        }
+//                    }
+//                }
+
+                boolean[] tempCheckArray = car.getAvailability().get(month);
+
+                for(int i = from; i < to ; i++) {
+                   if(tempCheckArray[i] = false) {
+                       //if any of the days is not available, test boolean is false 
+                       testBoolean = false;
+                   }
+                }
+                // if all days available 
+                if(testBoolean == true) {
+                    idList.add(car.getId());
+                }
+            }
+
+
+            for(Integer i: idList) {
+                //assigns last available 
+               id=i;
+
+            }
+        
+        }
+        
+        return id;
     }
 
     @Override
     public boolean bookCar(Month month, int day, Make make, int lengthOfRent) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        boolean bookingCompleted = false;
+        
+        int from = day - 1;
+        int to = from + lengthOfRent;
+        int carID = this.getCarAvailable(month, day, make, lengthOfRent);
+        List<CarInterface> carsOfMake = this.getAllCarsOfAMake(make, listOfCars);
+//        Map<Month,boolean[]> newAvailability; 
+//        boolean[] updatedDays;
+        
+        if(carID > 0) {
+            CarInterface tempCar; 
+            for(CarInterface car : carsOfMake) {
+                if(car.getId() == carID) {
+                    for(int i = from ; i < to ; i++) {
+                        car.book(month, i);
+                    }
+                    
+                }
+            }
+            
+            bookingCompleted = true;
+        } 
+        return bookingCompleted;
+     
     }
 
     @Override
