@@ -47,7 +47,7 @@ public class RentACar implements RentACarInterface {
 
     @Override
     public boolean checkAvailability(Month month, int day, Make make, int lengthOfRent) {
-//        boolean testBoolean = true;
+        
         boolean flag = true;
         int from = day;
         int to = from + lengthOfRent;
@@ -55,20 +55,24 @@ public class RentACar implements RentACarInterface {
       
 
         for(CarInterface car: listOfMake){
+            //updating a flag
             flag = true;
             
             for(int i = from; i < to ; i ++) {
                 if(!car.isAvailable(month, i)){
+                    //if any of the required days is unavailable, flag changes
                     flag = false;
                 }
             }
             
             if(flag) {
+                // at this point, if flag is still true, it means that at least on of the required cars is available
+                //if not we loop over next car, if this is th elast iteration, flaske is returend later
                 return flag;
             } 
             
         }
-            
+        //finall return    
     return flag;
     }
    
@@ -81,15 +85,13 @@ public class RentACar implements RentACarInterface {
         List<Integer> idList = new ArrayList<>();
         boolean testBoolean = true;
         
-        int id = 0; // if -1 is returned, the car is not available 
+        int id = 0; // if 0 is returned, the car is not available 
         
         int from = day;
         int to = from + lengthOfRent;   
     
         if(isAvailable) {
-            
-            
-            
+    
             for(CarInterface car: listOfMake){
 
                 boolean[] tempCheckArray = car.getAvailability().get(month);
@@ -106,13 +108,10 @@ public class RentACar implements RentACarInterface {
                 }
             }
 
-
             for(Integer i: idList) {
-                //assigns last available 
+                //assigns last available ID value
                id=i;
-
-            }
-        
+            }    
         }
         
         return id;
@@ -121,10 +120,11 @@ public class RentACar implements RentACarInterface {
     @Override
     public boolean bookCar(Month month, int day, Make make, int lengthOfRent) {
         
-        boolean bookingCompleted = false;
+        boolean bookingCompleted = false; // flag set tu false; 
         
         int from = day ;
         int to = from + lengthOfRent;
+        // checks if there is an ID available, if not false is returned at the end
         int carID = this.getCarAvailable(month, day, make, lengthOfRent);
         List<CarInterface> carsOfMake = this.getAllCarsOfAMake(make, listOfCars);
 
@@ -132,16 +132,19 @@ public class RentACar implements RentACarInterface {
         if(carID > 0) {
             CarInterface tempCar; 
             for(CarInterface car : carsOfMake) {
-                if(car.getId() == carID) {
+                // if id retreaved from iterated car matches carID checked before, 
+                // we have a car that is available, therefor, we can book it 
+                if(car.getId() == carID) { 
                     for(int i = from ; i < to ; i++) {
-                        car.book(month, i);
+                        // book each day of the lease
+                        bookingCompleted = car.book(month, i);
                     }
                     
                 }
             }
             
-            bookingCompleted = true;
         } 
+        
         return bookingCompleted;
      
     }
