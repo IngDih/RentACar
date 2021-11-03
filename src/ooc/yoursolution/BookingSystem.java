@@ -25,28 +25,29 @@ public class BookingSystem implements BookingSystemInterface {
 
         //First line in the file is the business name
         String line = in.readLine();
+
         String bussinessName = line;
-        int id = 0;
+        int id = 0; // we want to create unique id for every car
+
 
         /*While loop to split each line to obtain the values of Make, rent price and 
         number of cars available for rental.
          */
         while ((line = in.readLine()) != null) {
-
             String[] details = line.split(":"); //Make:Price:number of cars available
             Make make = Make.valueOf(details[0]);
             double rate = Double.parseDouble(details[1]);
             int numberOfCars = Integer.parseInt(details[2]);
-            
+
             /*For loop to create a new car the number of times it 
             says in the file.
              */
             for (int i = 0; i < numberOfCars; i++) {
                 id++;
+                //creating new car
                 listOfCars.add(new Car(make, rate, id));
             }
         }
         return new RentACar(listOfCars, bussinessName);
     }
-
 }
