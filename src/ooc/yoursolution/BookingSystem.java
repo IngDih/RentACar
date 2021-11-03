@@ -18,19 +18,29 @@ public class BookingSystem implements BookingSystemInterface {
 
     @Override
     public RentACarInterface setupRentACar(BufferedReader in) throws IOException {
-
+        /* listOfCars is an array that stores the info present in the text file 
+        as a list of car objects.        
+         */
         List<CarInterface> listOfCars = new ArrayList<>();
 
+        //First line in the file is the business name
         String line = in.readLine();
         String bussinessName = line;
         int id = 0;
 
+        /*While loop to split each line to obtain the values of Make, rent price and 
+        number of cars available for rental.
+         */
         while ((line = in.readLine()) != null) {
 
-            String[] details = line.split(":");
+            String[] details = line.split(":"); //Make:Price:number of cars available
             Make make = Make.valueOf(details[0]);
             double rate = Double.parseDouble(details[1]);
             int numberOfCars = Integer.parseInt(details[2]);
+            
+            /*For loop to create a new car the number of times it 
+            says in the file.
+             */
             for (int i = 0; i < numberOfCars; i++) {
                 id++;
                 listOfCars.add(new Car(make, rate, id));

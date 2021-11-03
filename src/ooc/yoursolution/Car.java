@@ -32,20 +32,16 @@ public class Car implements CarInterface {
 
     @Override
     public Map<Month, boolean[]> createAvailability() {
-        Map<Month, boolean[]> map = new HashMap<>();
-        Month tempMonth;
-        boolean[] tempBoolean;
+        //Creation of a Hashmap to associate the months in the enum to the boolean array
+        //Setting all the days to true, so later on they can be set to false when booking
+        Map<Month, boolean[]> map = new HashMap<>(); 
+        boolean[] daysOfMonth;
         for (Month month : Month.values()) {
-
-            tempMonth = month;
-            tempBoolean = new boolean[month.getNumberOfDays()];
-
-            map.put(month, tempBoolean);
-            for (Map.Entry<Month, boolean[]> m : map.entrySet()) {
-                for (int i = 0; i < m.getValue().length; i++) {
-                    m.getValue()[i] = true;
-                }
+            daysOfMonth = new boolean[month.getNumberOfDays()];
+            for (int i = 0; i < daysOfMonth.length; i++) {
+                daysOfMonth[i] = true;
             }
+            map.put(month, daysOfMonth);
         }
         return map;
     }
